@@ -13,14 +13,26 @@ var checkerArr = [
 
 ];
 
-for (var i = 0; i < checkerArr.length; i++) {
-    for (var j = 0; j < checkerArr.length; j++){
+function pattern(board) {
+for (var i = 0; i < board.length; i++) {
+    for (var j = 0; j < board.length; j++){
         if ( (i+j)%2 === 0 ) {
-          checkerArr[i][j] = 1;
+          board[i][j] = 1;
         } else {
-          checkerArr[i][j] = 2;
-        }
+          board[i][j] = 2;
+      }
     }
-}
+  }
+return board;
+};
 
-console.log(checkerArr);
+function randPattern(RandBoard) {
+  for (var i = 0; i < RandBoard.length; i++) {
+      for (var j = 0; j < RandBoard.length; j++){
+        RandBoard[i][j] = Math.floor(Math.random() * (2 - 0 + 1)) + 0; // syntax(max - min + 1)) + min
+      }
+    }
+  return RandBoard;
+};
+
+console.log(randPattern(checkerArr));
