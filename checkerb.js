@@ -1,18 +1,5 @@
 
 
-function pattern(board) {
-  for (var i = 0; i < board.length; i++) {
-    for (var j = 0; j < board.length; j++){
-        if ( (i+j)%2 === 0 ) {
-          board[i][j] = 1;
-        } else {
-          board[i][j] = 2;
-        }
-      }
-    }
-  return board;
-}
-
 function randPattern(RandBoard) {
   for (var i = 0; i < RandBoard.length; i++) {
     for (var j = 0; j < RandBoard.length; j++){
@@ -23,7 +10,7 @@ function randPattern(RandBoard) {
 }
 
 function isConsecutive(a,b,c,d) {
-  return ( (a !== 0)&&(a==b)&&(b==c)&&(c==d) );
+  return ( (a !== 0)&&(a==b)&&(a==c)&&(a==d)&&(b==c)&&(c==d) );
 }
 
 function mainCheck(tile) { // note that j is X-coordinate and i is Y-coordinate
@@ -35,7 +22,7 @@ function mainCheck(tile) { // note that j is X-coordinate and i is Y-coordinate
   for (var i = 0; i < 5; i++) {
     for (var j = 0; j < tile.length; j++) {
       if ( isConsecutive(tile[i][j], tile[i+1][j], tile[i+2][j], tile[i+3][j]) ) {
-          matchedArr.push(["vertically",i,j]);
+          matchedArr.push(["down",j+1,i+1]);
       }
     }
   }
@@ -43,8 +30,7 @@ function mainCheck(tile) { // note that j is X-coordinate and i is Y-coordinate
   for (var i = 0; i  < tile.length; i++) {
     for (var j = 0; j < 5; j++) {
       if ( isConsecutive(tile[i][j], tile[i][j+1], tile[i][j+2], tile[i][j+3] )) {
-          matchedArr.push(["horizontally",i,j]);
-
+          matchedArr.push(["right",j+1,i+1]);
       }
     }
   }
@@ -52,8 +38,7 @@ function mainCheck(tile) { // note that j is X-coordinate and i is Y-coordinate
   for (var i = 0; i  < 5; i++) {
     for (var j = 0; j < 5; j++) {
       if ( isConsecutive(tile[i][j], tile[i+1][j+1], tile[i+2][j+2], tile[i+3][j+3] )) {
-          matchedArr.push(["diagright",i,j]);
-
+          matchedArr.push(["diagright",j+1,i+1]);
       }
     }
   }
@@ -61,8 +46,7 @@ function mainCheck(tile) { // note that j is X-coordinate and i is Y-coordinate
   for (var i = 3; i  < 8; i++) {
     for (var j = 0; j < 5; j++) {
       if ( isConsecutive(tile[i][j], tile[i-1][j+1], tile[i-2][j+2], tile[i-3][j+3] )) {
-          matchedArr.push(["diagleft",i,j]);
-
+          matchedArr.push(["diagleft",j+1,i+1]);
       }
     }
   }
@@ -82,13 +66,10 @@ var checkerArr = [
   [0,0,0,0,0,0,0,0]
 
 ];
+var randomizedArr = randPattern(checkerArr);
 
-
-console.log(mainCheck(checkerArr));
-
-/*
-var matchTile = mainCheck(checkerArr);
-var verticalMatchX = matchTile[1];
-var verticalMatchY = matchTile[2];
-console.log("Found 4 consecutive tiles from tile " + verticalMatchX + "," + verticalMatchY + ".");
-*/
+console.log("This is a randomized 8X8 Checker board [0 are blanks, 1 are blacks, 2 are reds] :");
+console.log(randomizedArr);
+console.log("-------------------------------");
+console.log("Here are the places where you have 4 similar tiles in a row:");
+console.log(mainCheck(randomizedArr));
