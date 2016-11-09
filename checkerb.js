@@ -23,42 +23,66 @@ function randPattern(RandBoard) {
 }
 
 function isConsecutive(a,b,c,d) {
-  return ((a !== 0)&&(a !== 1)&&(a==b)&&(b==c)&&(c==d));
+  return ( (a !== 0)&&(a==b)&&(b==c)&&(c==d) );
 }
 
-function mainCheck(tile) {
+function mainCheck(tile) { // note that j is X-coordinate and i is Y-coordinate
+
+  //array for matched tiles
+  var matchedArr = [];
+
   //checks vertically
   for (var i = 0; i < 5; i++) {
     for (var j = 0; j < tile.length; j++) {
       if ( isConsecutive(tile[i][j], tile[i+1][j], tile[i+2][j], tile[i+3][j]) ) {
-          return [tile[i][j], i, j];
+          matchedArr.push(["vertically",i,j]);
       }
     }
-  };
+  }
   //checks horizontally
-  for (var i = 0; i  < 5; i++) {
-    for (var j = 0; j < tile.length; j++) {
+  for (var i = 0; i  < tile.length; i++) {
+    for (var j = 0; j < 5; j++) {
       if ( isConsecutive(tile[i][j], tile[i][j+1], tile[i][j+2], tile[i][j+3] )) {
-          return [tile[i][j], i, j];
+          matchedArr.push(["horizontally",i,j]);
+
       }
     }
-  };
+  }
+  //checks diagonally-right
+  for (var i = 0; i  < 5; i++) {
+    for (var j = 0; j < 5; j++) {
+      if ( isConsecutive(tile[i][j], tile[i+1][j+1], tile[i+2][j+2], tile[i+3][j+3] )) {
+          matchedArr.push(["diagright",i,j]);
 
-  return 0;
-};
+      }
+    }
+  }
+  //checks diagonally-left
+  for (var i = 3; i  < 8; i++) {
+    for (var j = 0; j < 5; j++) {
+      if ( isConsecutive(tile[i][j], tile[i-1][j+1], tile[i-2][j+2], tile[i-3][j+3] )) {
+          matchedArr.push(["diagleft",i,j]);
+
+      }
+    }
+  }
+
+  return matchedArr;
+}
 
 var checkerArr = [
 
   [0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,2],
-  [0,0,0,0,0,0,0,2],
-  [0,0,0,0,0,0,0,2],
-  [0,0,0,0,0,0,0,2],
+  [0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,0]
 
 ];
+
 
 console.log(mainCheck(checkerArr));
 
