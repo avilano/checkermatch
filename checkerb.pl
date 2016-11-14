@@ -5,16 +5,16 @@ use warnings;
 #Randomizes the 2D Array
 sub randPattern {
 my ($rand_ref) = @_;
-my @RandBoard = @{ $rand_ref };
+my @RandBoard = @$rand_ref;
 
 for (my $i = 0; $i <= $#RandBoard; $i++) {
   for (my $j = 0; $j <= $#RandBoard ; $j++) {
      $RandBoard[$i][$j] = 0 + int(rand(3 - 0));
-     #print "$RandBoard[$i][$j] ";
+     print "$RandBoard[$i][$j] ";
    }
-   #print "\n";
+   print "\n";
   }
-  return @RandBoard;
+return @RandBoard;
 }
 
 my @checkerArr =  (
@@ -28,5 +28,10 @@ my @checkerArr =  (
   [0,0,0,0,0,0,0,0]
 );
 
-my @randomizedArr = randPattern(\@checkerArr);
-print @randomizedArr, "\n";
+my ($randomizedArr_ref) = randPattern(\@checkerArr);
+my @randomizedArr = @$randomizedArr_ref;
+print "___________________\n";
+
+foreach (@randomizedArr){
+print "$_ "; }
+print "\n";

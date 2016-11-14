@@ -60,6 +60,8 @@ function mainCheck(tile) { // note that j is X-coordinate and i is Y-coordinate
     }
   }
 
+
+
   return matchedArr;
 }
 
