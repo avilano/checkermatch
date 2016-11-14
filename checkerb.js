@@ -1,5 +1,5 @@
 
-
+// Randomizes the 2D Array
 function randPattern(RandBoard) {
   for (var i = 0; i < RandBoard.length; i++) {
     for (var j = 0; j < RandBoard.length; j++){
@@ -9,6 +9,7 @@ function randPattern(RandBoard) {
   return RandBoard;
 }
 
+//Checks if consecutive tiles are equal
 function isConsecutive(a,b,c,d) {
   return ( (a !== 0)&&(a===b)&&(a===c)&&(a===d)&&(b===c)&&(c===d) );
 }
@@ -62,6 +63,7 @@ function mainCheck(tile) { // note that j is X-coordinate and i is Y-coordinate
   return matchedArr;
 }
 
+// Original 2D Array
 var checkerArr = [
 
   [0,0,0,0,0,0,0,0],
@@ -74,6 +76,8 @@ var checkerArr = [
   [0,0,0,0,0,0,0,0]
 
 ];
+
+
 var randomizedArr = randPattern(checkerArr)
 var resultArr = mainCheck(randomizedArr)
 
